@@ -7,26 +7,13 @@
 
 import Foundation
 
-struct Listing: Decodable {
+struct Listing {
 	let id: UInt64
-	let categoryId: Int
+	let category: Category
 	let title: String
 	let description: String
 	let price: Double
 	let image: ListingImage?
 	let creationDate: Date
 	let isUrgent: Bool
-
-	enum CodingKeys: String, CodingKey {
-		case id, title, description, price
-		case image = "images_url"
-		case categoryId = "category_id"
-		case creationDate = "creation_date"
-		case isUrgent = "is_urgent"
-	}
-}
-
-struct ListingImage: Decodable {
-	let small: String?
-	let thumb: String?
 }

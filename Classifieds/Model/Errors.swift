@@ -10,4 +10,5 @@ import Foundation
 enum Errors: Error {
 	case failedToBuildRequest
 	case failToDecode
+	case emptyResult
 }

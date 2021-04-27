@@ -19,14 +19,13 @@
 		C6A9829E263854700078F72C /* ApiClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6A9829D263854700078F72C /* ApiClient.swift */; };
 		C6A982A7263855FB0078F72C /* Routes.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6A982A6263855FA0078F72C /* Routes.swift */; };
 		C6A982AC263858050078F72C /* Errors.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6A982AB263858050078F72C /* Errors.swift */; };
-		C6A982B42638595A0078F72C /* Listing.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6A982B32638595A0078F72C /* Listing.swift */; };
+		C6A982B42638595A0078F72C /* ListingsResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6A982B32638595A0078F72C /* ListingsResponse.swift */; };
 		C6A982B926385AA50078F72C /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6A982B826385AA50078F72C /* Category.swift */; };
-		C6A982BE26385B100078F72C /* ClassifiiedRepo.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6A982BD26385B100078F72C /* ClassifiiedRepo.swift */; };
+		C6A982BE26385B100078F72C /* ClassifiedRepo.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6A982BD26385B100078F72C /* ClassifiedRepo.swift */; };
 		C6A982C326385B330078F72C /* CachManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6A982C226385B330078F72C /* CachManager.swift */; };
 		C6A982C826385B420078F72C /* ImageLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6A982C726385B420078F72C /* ImageLoader.swift */; };
 		C6A982D026386BAD0078F72C /* ListingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6A982CF26386BAD0078F72C /* ListingCell.swift */; };
-		C6A982D526386CB60078F72C /* VerticalStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6A982D426386CB60078F72C /* VerticalStackView.swift */; };
-		C6A982DA26386DFD0078F72C /* HorizontalStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6A982D926386DFD0078F72C /* HorizontalStackView.swift */; };
+		C6A982F0263876010078F72C /* Listing.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6A982EF263876010078F72C /* Listing.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -65,14 +64,13 @@
 		C6A9829D263854700078F72C /* ApiClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiClient.swift; sourceTree = "<group>"; };
 		C6A982A6263855FA0078F72C /* Routes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Routes.swift; sourceTree = "<group>"; };
 		C6A982AB263858050078F72C /* Errors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Errors.swift; sourceTree = "<group>"; };
-		C6A982B32638595A0078F72C /* Listing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Listing.swift; sourceTree = "<group>"; };
+		C6A982B32638595A0078F72C /* ListingsResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListingsResponse.swift; sourceTree = "<group>"; };
 		C6A982B826385AA50078F72C /* Category.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
-		C6A982BD26385B100078F72C /* ClassifiiedRepo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClassifiiedRepo.swift; sourceTree = "<group>"; };
+		C6A982BD26385B100078F72C /* ClassifiedRepo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClassifiedRepo.swift; sourceTree = "<group>"; };
 		C6A982C226385B330078F72C /* CachManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CachManager.swift; sourceTree = "<group>"; };
 		C6A982C726385B420078F72C /* ImageLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageLoader.swift; sourceTree = "<group>"; };
 		C6A982CF26386BAD0078F72C /* ListingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListingCell.swift; sourceTree = "<group>"; };
-		C6A982D426386CB60078F72C /* VerticalStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerticalStackView.swift; sourceTree = "<group>"; };
-		C6A982D926386DFD0078F72C /* HorizontalStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HorizontalStackView.swift; sourceTree = "<group>"; };
+		C6A982EF263876010078F72C /* Listing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Listing.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -158,8 +156,6 @@
 			children = (
 				C6A98282263844210078F72C /* ColoredNavigationBar.swift */,
 				C6A982CF26386BAD0078F72C /* ListingCell.swift */,
-				C6A982D426386CB60078F72C /* VerticalStackView.swift */,
-				C6A982D926386DFD0078F72C /* HorizontalStackView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -176,9 +172,10 @@
 			isa = PBXGroup;
 			children = (
 				C6A982AB263858050078F72C /* Errors.swift */,
-				C6A982B32638595A0078F72C /* Listing.swift */,
+				C6A982B32638595A0078F72C /* ListingsResponse.swift */,
 				C6A982B826385AA50078F72C /* Category.swift */,
-				C6A982BD26385B100078F72C /* ClassifiiedRepo.swift */,
+				C6A982BD26385B100078F72C /* ClassifiedRepo.swift */,
+				C6A982EF263876010078F72C /* Listing.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -335,19 +332,18 @@
 				C6A982C826385B420078F72C /* ImageLoader.swift in Sources */,
 				C6A9829E263854700078F72C /* ApiClient.swift in Sources */,
 				C6A982AC263858050078F72C /* Errors.swift in Sources */,
-				C6A982B42638595A0078F72C /* Listing.swift in Sources */,
+				C6A982B42638595A0078F72C /* ListingsResponse.swift in Sources */,
 				C6A982A7263855FB0078F72C /* Routes.swift in Sources */,
 				C6A9823726383FE10078F72C /* AppDelegate.swift in Sources */,
 				C6A9827E263841F20078F72C /* Font.swift in Sources */,
-				C6A982DA26386DFD0078F72C /* HorizontalStackView.swift in Sources */,
 				C6A98283263844210078F72C /* ColoredNavigationBar.swift in Sources */,
 				C6A982792638416E0078F72C /* Color.swift in Sources */,
+				C6A982F0263876010078F72C /* Listing.swift in Sources */,
 				C6A982C326385B330078F72C /* CachManager.swift in Sources */,
 				C6A98271263840AA0078F72C /* Appearance.swift in Sources */,
 				C6A9828B263845C80078F72C /* MainViewController.swift in Sources */,
 				C6A982D026386BAD0078F72C /* ListingCell.swift in Sources */,
-				C6A982D526386CB60078F72C /* VerticalStackView.swift in Sources */,
-				C6A982BE26385B100078F72C /* ClassifiiedRepo.swift in Sources */,
+				C6A982BE26385B100078F72C /* ClassifiedRepo.swift in Sources */,
 				C6A982B926385AA50078F72C /* Category.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -6,60 +6,91 @@
 //
 
 import UIKit
-import Combine
 
 class MainViewController: UIViewController {
-	private let repo = ClassifiiedRepo()
-		//= ClassifiiedRepo.shared
-	//private var cancellable: AnyCancellable?
+	let activityIndicator = UIActivityIndicatorView(style: .whiteLarge)
+	let tableView = UITableView()
+	
+	private let repo = ClassifiedRepo()
+	private var listings = [Listing]()
+
+	override func loadView() {
+		super.loadView()
+		//setupTableView()
+	}
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
 		initView()
 
+		repo.listingsDeleagate = self
 		repo.fetchListings()
-//		cancellable = repo.$listings.sink { [weak self] listings in
-//			if !listings.isEmpty {
-//				self?.updateUI(listings)
-//			}
-//		}
     }
 
-	deinit {
-		//cancellable?.cancel()
+	func setupTableView() {
+		view.addSubview(tableView)
+
+		tableView.translatesAutoresizingMaskIntoConstraints = false
+
+		tableView.register(ListingCell.self, forCellReuseIdentifier: ListingCell.identifier)
+
+		NSLayoutConstraint.activate([
+			tableView.topAnchor.constraint(equalTo: view.topAnchor),
+			tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+			tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+			tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
+		])
+
+		tableView.rowHeight = 120
+		tableView.estimatedRowHeight = 120
+		
+		tableView.dataSource = self
 	}
 
-	private func updateUI(_ listings: [Listing]) {
+	private func updateUI(_ listings: [ListingsResponse]) {
 		print(listings)
 	}
 
 	private func initView() {
-		let logo: UIImageView = UIImageView(image: UIImage(named: "AppIcon"))
-		let bottomImage: UIImageView = UIImageView(image: #imageLiteral(resourceName: "im_map"))
-
-		let activityIndicator = UIActivityIndicatorView(style: .white)
-
-		bottomImage.contentMode = .scaleAspectFill
-
 		view.backgroundColor = Color.Dark
-		view.addSubview(bottomImage)
-		view.addSubview(logo)
 		view.addSubview(activityIndicator)
 
-		let margins = view.layoutMarginsGuide
+		setupTableView()
 
+		activityIndicator.translatesAutoresizingMaskIntoConstraints = false
 		NSLayoutConstraint.activate([
-
-			logo.centerYAnchor.constraint(equalTo: margins.centerYAnchor),
-			logo.centerXAnchor.constraint(equalTo: margins.centerXAnchor),
-
-			activityIndicator.centerXAnchor.constraint(equalTo: logo.centerXAnchor),
-			activityIndicator.topAnchor.constraint(equalTo: logo.bottomAnchor),
-
-			bottomImage.leadingAnchor.constraint(equalTo: margins.leadingAnchor),
-			bottomImage.trailingAnchor.constraint(equalTo: margins.trailingAnchor),
-			bottomImage.bottomAnchor.constraint(equalTo: margins.bottomAnchor)
+			activityIndicator.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+			activityIndicator.centerXAnchor.constraint(equalTo: view.centerXAnchor)
 		])
+	}
+}
+
+//MARK: = UITableViewDataSource
+extension MainViewController : UITableViewDataSource {
+	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+		listings.count
+	}
+
+	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+		let cell = tableView.dequeueReusableCell(withIdentifier: ListingCell.identifier, for: indexPath) as! ListingCell
+		let listing = listings[indexPath.row]
+		cell.configure(listing: listing)
+		return cell
+	}
+}
+
+extension MainViewController : ListingsDelegate {
+	func onLoadingStarted() {
+		//todo
+	}
+
+	func onError(error: Error) {
+		//todo
+	}
+
+	func onListingsFetched(_ listings: [Listing]) {
+		self.listings = listings
+		tableView.reloadData()
 	}
 }

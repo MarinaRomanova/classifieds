@@ -26,8 +26,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 	}
 
 	func set(rootViewController: UIViewController) {
-		window?.subviews.forEach({ $0.removeFromSuperview() })
-		window?.rootViewController = nil
 		window?.rootViewController = rootViewController
 		window?.makeKeyAndVisible()
 	}
