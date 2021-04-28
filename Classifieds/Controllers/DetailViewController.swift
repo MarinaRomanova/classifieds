@@ -23,7 +23,7 @@ class DetailViewController: UIViewController {
 		let scrollView = UIScrollView()
 		scrollView.translatesAutoresizingMaskIntoConstraints = false
 		scrollView.isScrollEnabled = true
-		return scrollView
+		return scrollView //TODO problem scrolling
 	}()
 
 	init(listing: Listing) {
@@ -32,8 +32,6 @@ class DetailViewController: UIViewController {
 
 		view.backgroundColor = Color.OffWhite
 		title = listing.category.name
-
-		configure()
 	}
 
 	required init?(coder aDecoder: NSCoder) {
@@ -44,6 +42,7 @@ class DetailViewController: UIViewController {
         super.viewDidLoad()
 
 		initialize()
+		configure()
     }
 
 	func configure() {
@@ -59,6 +58,8 @@ class DetailViewController: UIViewController {
 				}
 				self?.picture.image = UIImage(data: data)
 			}
+		} else {
+			self.picture.image = UIImage()
 		}
 	}
 
@@ -75,7 +76,7 @@ class DetailViewController: UIViewController {
 
 		NSLayoutConstraint.activate([
 			scrollView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-			scrollView.widthAnchor.constraint(equalTo: view.widthAnchor, constant: -20),
+			scrollView.widthAnchor.constraint(equalTo: view.widthAnchor, constant: -40),
 			scrollView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
 			scrollView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20),
 

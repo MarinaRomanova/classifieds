@@ -21,10 +21,9 @@ final class ImageLoader {
 				guard let httpResponse = response as? HTTPURLResponse, data != nil && error == nil else {
 					return
 				}
-				if httpResponse.statusCode >= 400 {
-					return
+				if httpResponse.statusCode < 400 {
+					CachManager.setImageCache(path, data!)
 				}
-				CachManager.setImageCache(path, data!)
 				DispatchQueue.main.async {
 					completion(path, data!)
 				}

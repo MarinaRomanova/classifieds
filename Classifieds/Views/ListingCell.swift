@@ -64,7 +64,7 @@ class ListingCell: UITableViewCell {
 
 		NSLayoutConstraint.activate([
 			picture.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
-			picture.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant:10),
+			picture.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant:20),
 			picture.widthAnchor.constraint(equalToConstant:100),
 			picture.heightAnchor.constraint(equalToConstant:100),
 

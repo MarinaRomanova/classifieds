@@ -9,7 +9,7 @@ import UIKit
 
 class CustomImageView: UIImageView {
 
-	override init(image: UIImage? = nil) {
+	init() {
 		super.init(frame: .zero)
 
 		translatesAutoresizingMaskIntoConstraints = false
