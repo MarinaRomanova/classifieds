@@ -18,7 +18,10 @@ final class ImageLoader {
 
 		if let url = URL(string: path) {
 			let task = URLSession.shared.dataTask(with: url) { data, response, error in
-				guard data != nil && error == nil else {
+				guard let httpResponse = response as? HTTPURLResponse, data != nil && error == nil else {
+					return
+				}
+				if httpResponse.statusCode >= 400 {
 					return
 				}
 				CachManager.setImageCache(path, data!)

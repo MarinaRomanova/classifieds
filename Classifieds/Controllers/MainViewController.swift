@@ -44,8 +44,11 @@ class MainViewController: UIViewController {
 
 		tableView.rowHeight = 120
 		tableView.estimatedRowHeight = 120
+		tableView.separatorStyle = .none
+		tableView.accessibilityIdentifier = "tableView"
 		
 		tableView.dataSource = self
+		tableView.delegate = self
 	}
 
 	private func updateUI(_ listings: [ListingsResponse]) {
@@ -53,7 +56,9 @@ class MainViewController: UIViewController {
 	}
 
 	private func initView() {
-		view.backgroundColor = Color.Dark
+		title = "Annonces"
+		navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Filtrer", style: .plain, target: self, action: #selector(presentFilters))
+
 		view.addSubview(activityIndicator)
 
 		setupTableView()
@@ -63,6 +68,23 @@ class MainViewController: UIViewController {
 			activityIndicator.centerYAnchor.constraint(equalTo: view.centerYAnchor),
 			activityIndicator.centerXAnchor.constraint(equalTo: view.centerXAnchor)
 		])
+	}
+
+	@objc
+	private func presentFilters() {
+		let navigationController = UINavigationController()
+		navigationController.viewControllers = [FilterViewController()]
+		present(navigationController, animated: true, completion: nil) //todo apply completion to filter
+	}
+}
+
+//MARK: = UITableViewDelegate
+extension MainViewController : UITableViewDelegate {
+	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+		let listing = listings[indexPath.row]
+		let nav = UINavigationController()
+		nav.viewControllers = [DetailViewController(listing: listing)]
+		navigationController?.pushViewController(DetailViewController(listing: listing), animated: true)
 	}
 }
 
@@ -82,14 +104,16 @@ extension MainViewController : UITableViewDataSource {
 
 extension MainViewController : ListingsDelegate {
 	func onLoadingStarted() {
-		//todo
+		activityIndicator.startAnimating()
+
 	}
 
 	func onError(error: Error) {
-		//todo
+		activityIndicator.stopAnimating()
 	}
 
 	func onListingsFetched(_ listings: [Listing]) {
+		activityIndicator.stopAnimating()
 		self.listings = listings
 		tableView.reloadData()
 	}

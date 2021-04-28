@@ -16,13 +16,12 @@ enum Appearance {
 			appearance.backgroundColor = Color.Orange
 			appearance.shadowColor = Color.Clear
 
+
 			appearance.titleTextAttributes = [.foregroundColor: Color.White, .font: Font(.helveticaNeueMedium, size: .h18).instance]
 			appearance.largeTitleTextAttributes = [.foregroundColor: Color.White, .font: Font(.helveticaNeueMedium, size: .h22).instance]
 
-			appearance.buttonAppearance.normal.titleTextAttributes = [.font: Font(.helveticaNeueLight, size: .h14).instance]
-			appearance.backButtonAppearance.normal.titleTextAttributes = [.font: UIFont.systemFont(ofSize: 0),
-																		  .foregroundColor: UIColor.clear]
-			appearance.doneButtonAppearance.normal.titleTextAttributes = [.font: Font(.helveticaNeueLight, size: .h14).instance]
+			appearance.buttonAppearance.normal.titleTextAttributes = [.foregroundColor: Color.White, .font: Font(.helveticaNeueLight, size: .h16).instance]
+			appearance.doneButtonAppearance.normal.titleTextAttributes = [.foregroundColor: Color.White, .font: Font(.helveticaNeueLight, size: .h16).instance]
 
 			UINavigationBar.appearance().standardAppearance = appearance
 			UINavigationBar.appearance().compactAppearance = appearance

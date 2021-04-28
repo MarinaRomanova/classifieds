@@ -12,7 +12,7 @@ struct Listing {
 	let category: Category
 	let title: String
 	let description: String
-	let price: Double
+	let price: String
 	let image: ListingImage?
 	let creationDate: Date
 	let isUrgent: Bool

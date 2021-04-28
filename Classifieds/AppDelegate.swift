@@ -26,7 +26,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 	}
 
 	func set(rootViewController: UIViewController) {
-		window?.rootViewController = rootViewController
+		let nav = UINavigationController()
+		nav.viewControllers = [rootViewController]
+		nav.navigationBar.tintColor = Color.White
+		window?.rootViewController = nav
 		window?.makeKeyAndVisible()
 	}
 }

@@ -36,7 +36,7 @@ final class ClassifiedRepo {
 			for response in listings {
 				if let category = categories.first(where: { $0.id == response.categoryId }) {
 					list.append(Listing(id: response.id, category: category, title: response.title,
-										description: response.description, price: response.price,
+										description: response.description, price: "\(response.price) €", //todo
 										image: response.image, creationDate: response.creationDate, isUrgent: response.isUrgent))
 				}
 			}

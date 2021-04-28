@@ -10,14 +10,7 @@ import UIKit
 class ListingCell: UITableViewCell {
 	private let imageLoader = ImageLoader.shared
 
-	var picture: UIImageView = {
-		let img = UIImageView(image: UIImage(named: "AppIcon"))
-		img.contentMode = .scaleAspectFill
-		img.translatesAutoresizingMaskIntoConstraints = false
-		img.layer.cornerRadius = 13
-		img.clipsToBounds = true
-		return img
-	}()
+	var picture: UIImageView = CustomImageView()
 
 	var activityIndicator: UIActivityIndicatorView = {
 		let indicator = UIActivityIndicatorView(style: .whiteLarge)
@@ -25,32 +18,11 @@ class ListingCell: UITableViewCell {
 		return indicator
 	}()
 
-	var titleLabel : UILabel = {
-		let label = UILabel()
-		label.translatesAutoresizingMaskIntoConstraints = false
-		label.font = Font(.helveticaNeueMedium, size: .h20).instance
-		label.textColor = Color.Dark
-		label.numberOfLines = 0
-		return label
-	}()
+	var titleLabel : UILabel = CustomLabel()
+	var priceLabel : UILabel = CustomLabel()
+	var categorieLabel: UILabel = CustomLabel(color: Color.GrayMidDark, font: Font(.helveticaNeueMedium, size: .h16))
 
-	var categorieLabel: UILabel = {
-		let label = UILabel()
-		label.translatesAutoresizingMaskIntoConstraints = false
-		label.font = Font(.helveticaNeueMedium, size: .h16).instance
-		label.textColor = Color.GrayMidDark
-		return label
-	}()
-
-	var priceLabel : UILabel = {
-		let label = UILabel()
-		label.translatesAutoresizingMaskIntoConstraints = false
-		label.font = Font(.helveticaNeueMedium, size: .h20).instance
-		label.textColor = Color.Dark
-		return label
-	}()
-
-	let containerView:UIView = {
+	let containerView: UIView = {
 		let view = UIView()
 		view.translatesAutoresizingMaskIntoConstraints = false
 		view.clipsToBounds = true
@@ -60,6 +32,7 @@ class ListingCell: UITableViewCell {
 	override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
 		super.init(style: style, reuseIdentifier: reuseIdentifier)
 
+		accessibilityLabel = reuseIdentifier != nil ? reuseIdentifier : "listingCell"
 		backgroundColor = .clear
 
 		layer.shadowOpacity = 0.23
@@ -78,14 +51,13 @@ class ListingCell: UITableViewCell {
 		selectionStyle = .none
 		backgroundColor = Color.White
 
-		accessibilityLabel = "listingCell"
-
 		contentView.backgroundColor = .white
 		contentView.layer.cornerRadius = 8
 		contentView.layer.masksToBounds = true
 
 		contentView.addSubview(containerView)
 		contentView.addSubview(picture)
+
 		containerView.addSubview(titleLabel)
 		containerView.addSubview(priceLabel)
 		containerView.addSubview(categorieLabel)
@@ -117,7 +89,7 @@ class ListingCell: UITableViewCell {
 
 	func configure(listing: Listing) {
 		titleLabel.text = listing.title
-		priceLabel.text = "\(listing.price) €"
+		priceLabel.text = listing.price
 		categorieLabel.text = listing.category.name
 
 		if let path = listing.image?.small {
