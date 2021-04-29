@@ -27,7 +27,13 @@ class FilterViewController: UITableViewController {
 		tableView.tintColor = Color.Orange
 
 		navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Reset", style: .plain, target: self, action: #selector(resetFilters))
+		navigationItem.leftBarButtonItem = UIBarButtonItem(title: "OK", style: .plain, target: self, action: #selector(applyFilters))
     }
+
+	@objc
+	private func applyFilters() {
+		dismiss(animated: true, completion: nil)
+	}
 
 	@objc
 	private func resetFilters() {

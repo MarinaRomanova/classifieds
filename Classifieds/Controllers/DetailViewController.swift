@@ -15,7 +15,7 @@ class DetailViewController: UIViewController {
 	var titleLabel: UILabel = CustomLabel()
 	var priceLabel: UILabel = CustomLabel()
 	var descriptionLabel: UILabel = CustomLabel(font: Font(.helveticaNeueLight, size: .h16))
-	var createdAtLabel: UILabel = CustomLabel(color: Color.GrayMidDark, font: Font(.helveticaNeueMedium, size: .h16))
+	var createdAtLabel: UILabel = CustomLabel(color: Color.GrayMidDark, font: Font(.helveticaNeueLight, size: .h16))
 	var urgentLabel = PaddingLabel(text: "urgent")
 
 	let contentView = UIView()

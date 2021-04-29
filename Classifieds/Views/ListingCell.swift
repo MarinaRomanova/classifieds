@@ -21,6 +21,7 @@ class ListingCell: UITableViewCell {
 	var titleLabel : UILabel = CustomLabel()
 	var priceLabel : UILabel = CustomLabel()
 	var categorieLabel: UILabel = CustomLabel(color: Color.GrayMidDark, font: Font(.helveticaNeueMedium, size: .h16))
+	var createdAtLabel: UILabel = CustomLabel(color: Color.GrayMidDark, font: Font(.helveticaNeueLight, size: .h14))
 	let urgentLabel = PaddingLabel(text: "urgent")
 
 	let containerView: UIView = {
@@ -62,12 +63,13 @@ class ListingCell: UITableViewCell {
 		containerView.addSubview(titleLabel)
 		containerView.addSubview(priceLabel)
 		containerView.addSubview(categorieLabel)
+		containerView.addSubview(createdAtLabel)
 
 		NSLayoutConstraint.activate([
 			picture.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
 			picture.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant:20),
-			picture.widthAnchor.constraint(equalToConstant:100),
-			picture.heightAnchor.constraint(equalToConstant:100),
+			picture.widthAnchor.constraint(equalToConstant:105),
+			picture.heightAnchor.constraint(equalToConstant:140),
 
 			containerView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
 			containerView.leadingAnchor.constraint(equalTo: picture.trailingAnchor, constant:10),
@@ -78,13 +80,17 @@ class ListingCell: UITableViewCell {
 			titleLabel.leadingAnchor.constraint(equalTo: containerView.leadingAnchor),
 			titleLabel.trailingAnchor.constraint(equalTo: containerView.trailingAnchor),
 
-			priceLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor),
+			priceLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 10),
 			priceLabel.leadingAnchor.constraint(equalTo: titleLabel.leadingAnchor),
 			priceLabel.trailingAnchor.constraint(equalTo: titleLabel.trailingAnchor),
 
 			categorieLabel.topAnchor.constraint(equalTo: priceLabel.bottomAnchor, constant: 10),
 			categorieLabel.leadingAnchor.constraint(equalTo: titleLabel.leadingAnchor),
-			categorieLabel.trailingAnchor.constraint(equalTo: titleLabel.trailingAnchor)
+			categorieLabel.trailingAnchor.constraint(equalTo: titleLabel.trailingAnchor),
+
+			createdAtLabel.topAnchor.constraint(equalTo: categorieLabel.bottomAnchor, constant: 10),
+			createdAtLabel.leadingAnchor.constraint(equalTo: titleLabel.leadingAnchor),
+			createdAtLabel.trailingAnchor.constraint(equalTo: titleLabel.trailingAnchor)
 		])
 
 		urgentLabel.font = Font(.helveticaNeueMedium, size: .h12).instance
@@ -95,8 +101,11 @@ class ListingCell: UITableViewCell {
 
 	func configure(listing: Listing) {
 		titleLabel.text = listing.title
+		titleLabel.numberOfLines = 2
+
 		priceLabel.text = listing.price
 		categorieLabel.text = listing.category.name
+		createdAtLabel.text = listing.creationDate.getFormattedDate()
 
 		if let path = listing.image?.small {
 			imageLoader.loadImage(from: path) { [weak self] urlStr, data in

@@ -40,8 +40,8 @@ class MainViewController: UIViewController {
 			tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10)
 		])
 
-		tableView.rowHeight = 120
-		tableView.estimatedRowHeight = 120
+		tableView.rowHeight = 160
+		tableView.estimatedRowHeight = 160
 		tableView.separatorStyle = .none
 		tableView.accessibilityIdentifier = "tableView"
 		
