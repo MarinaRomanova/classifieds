@@ -62,6 +62,12 @@ class DetailViewController: UIViewController {
 		} else {
 			self.picture.image = UIImage()
 		}
+
+		if listing.isUrgent {
+			contentView.addSubview(urgentLabel)
+			urgentLabel.leadingAnchor.constraint(equalTo: picture.leadingAnchor, constant: 20).isActive = true
+			urgentLabel.topAnchor.constraint(equalTo: picture.topAnchor, constant: 10).isActive = true
+		}
 	}
 
 	func initialize() {
@@ -70,7 +76,6 @@ class DetailViewController: UIViewController {
 		scrollView.addSubview(contentView)
 
 		contentView.addSubview(picture)
-		contentView.addSubview(urgentLabel)
 		contentView.addSubview(titleLabel)
 		contentView.addSubview(priceLabel)
 		contentView.addSubview(createdAtLabel)
@@ -90,9 +95,6 @@ class DetailViewController: UIViewController {
 			picture.centerXAnchor.constraint(equalTo: scrollView.centerXAnchor),
 			picture.widthAnchor.constraint(equalTo: contentView.widthAnchor),
 			picture.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
-
-			urgentLabel.leadingAnchor.constraint(equalTo: picture.leadingAnchor, constant: 20),
-			urgentLabel.topAnchor.constraint(equalTo: picture.topAnchor, constant: 10),
 
 			titleLabel.centerXAnchor.constraint(equalTo: scrollView.centerXAnchor),
 			titleLabel.topAnchor.constraint(equalTo: picture.bottomAnchor, constant: 20),

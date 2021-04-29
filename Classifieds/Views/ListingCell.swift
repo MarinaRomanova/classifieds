@@ -21,6 +21,7 @@ class ListingCell: UITableViewCell {
 	var titleLabel : UILabel = CustomLabel()
 	var priceLabel : UILabel = CustomLabel()
 	var categorieLabel: UILabel = CustomLabel(color: Color.GrayMidDark, font: Font(.helveticaNeueMedium, size: .h16))
+	let urgentLabel = PaddingLabel(text: "urgent")
 
 	let containerView: UIView = {
 		let view = UIView()
@@ -85,6 +86,11 @@ class ListingCell: UITableViewCell {
 			categorieLabel.leadingAnchor.constraint(equalTo: titleLabel.leadingAnchor),
 			categorieLabel.trailingAnchor.constraint(equalTo: titleLabel.trailingAnchor)
 		])
+
+		urgentLabel.font = Font(.helveticaNeueMedium, size: .h12).instance
+		contentView.addSubview(urgentLabel)
+		urgentLabel.leadingAnchor.constraint(equalTo: picture.leadingAnchor, constant: 5).isActive = true
+		urgentLabel.topAnchor.constraint(equalTo: picture.topAnchor, constant: 5).isActive = true
 	}
 
 	func configure(listing: Listing) {
@@ -100,6 +106,8 @@ class ListingCell: UITableViewCell {
 				self?.picture.image = UIImage(data: data)
 			}
 		}
+
+		urgentLabel.isHidden = !listing.isUrgent
 	}
 }
 

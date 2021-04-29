@@ -35,9 +35,9 @@ class MainViewController: UIViewController {
 
 		NSLayoutConstraint.activate([
 			tableView.topAnchor.constraint(equalTo: view.topAnchor),
-			tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+			tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10),
 			tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-			tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
+			tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10)
 		])
 
 		tableView.rowHeight = 120
@@ -50,6 +50,7 @@ class MainViewController: UIViewController {
 	}
 
 	private func initView() {
+		view.backgroundColor = Color.GrayMidLight
 		title = "Annonces"
 		view.addSubview(activityIndicator)
 

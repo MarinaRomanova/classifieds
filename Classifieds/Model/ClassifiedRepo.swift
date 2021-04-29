@@ -64,7 +64,15 @@ final class ClassifiedRepo {
 				}
 			}
 			self?.listings = list.sorted { lhs, rhs -> Bool in
-				lhs.creationDate > rhs.creationDate
+				if lhs.isUrgent && !rhs.isUrgent {
+					return true
+				} else if !lhs.isUrgent && rhs.isUrgent {
+					return false
+				} else if lhs.isUrgent == rhs.isUrgent {
+					return lhs.creationDate > rhs.creationDate
+				}
+
+				return false
 			}
 		}
 	}

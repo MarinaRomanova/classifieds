@@ -8,7 +8,7 @@
 import UIKit
 
 class FilterViewController: UITableViewController {
-	var filters: [Filter]
+	private(set) var filters: [Filter]
 	weak var filterDeleagate: FilterDelegate?
 
 	init(filters: [Filter]) {
@@ -25,7 +25,17 @@ class FilterViewController: UITableViewController {
 		title = "Categories"
 		tableView.register(UITableViewCell.self, forCellReuseIdentifier: UITableViewCell.identifier)
 		tableView.tintColor = Color.Orange
+
+		navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Reset", style: .plain, target: self, action: #selector(resetFilters))
     }
+
+	@objc
+	private func resetFilters() {
+		for i in 0...filters.count - 1 {
+			filters[i].isSelected = false
+		}
+		tableView.reloadData()
+	}
 
 	override func viewWillDisappear(_ animated: Bool) {
 		filterDeleagate?.applyFilters(filters)
