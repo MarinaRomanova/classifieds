@@ -48,6 +48,7 @@ class FilterViewController: UITableViewController {
 	}
 
 	override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+		resetFilters()
 		let filter = filters[indexPath.row]
 		filters[indexPath.row].isSelected = !filter.isSelected
 		if let cell = tableView.cellForRow(at: indexPath) {
