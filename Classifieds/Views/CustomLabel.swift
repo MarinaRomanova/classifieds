@@ -27,3 +27,18 @@ class CustomLabel: UILabel {
 		fatalError("init(coder:) has not been implemented")
 	}
 }
+
+extension UILabel {
+	func setBadgeStyle() {
+		layer.cornerRadius = 8.0
+		layer.borderWidth = 2
+		backgroundColor = Color.Orange
+		layer.borderColor = Color.Orange.cgColor
+		layer.masksToBounds = true
+		sizeToFit()
+		text = text?.uppercased()
+		textColor = Color.White
+		font = Font(.helveticaNeueBold, size: .h14).instance
+		textAlignment = .center
+	}
+}

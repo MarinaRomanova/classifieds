@@ -7,40 +7,65 @@
 
 import Foundation
 
-protocol ListingsDelegate: NSObject {
+protocol ListingsDelegate: AnyObject {
 	func onLoadingStarted()
 	func onError(error: Error)
 	func onListingsFetched(_ listings: [Listing])
 }
 
+protocol FilterDelegate: AnyObject {
+	func applyFilters(_ filter: [Filter])
+}
+
 final class ClassifiedRepo {
 	weak var listingsDeleagate: ListingsDelegate?
+	weak var filterDeleagate: FilterDelegate?
+
+	var filters: [Filter] = [] {
+		didSet {
+			if oldValue != filters {
+				let selectedFilters = filters.filter({ $0.isSelected })
+				if selectedFilters.isEmpty {
+					listingsDeleagate?.onListingsFetched(listings)
+				} else {
+					let _listings = listings.filter({ selectedFilters.map{$0.categoryName}.contains($0.category.name) })
+					listingsDeleagate?.onListingsFetched(_listings)
+				}
+			}
+		}
+	}
+
+	private(set) var listings = [Listing]() {
+		didSet {
+			listingsDeleagate?.onListingsFetched(listings)
+		}
+	}
 
 	func fetchListings() {
-
 		var categories = [Category]()
-		var listings = [ListingsResponse]()
+		var listingsResp = [ListingsResponse]()
 		listingsDeleagate?.onLoadingStarted()
 
 		let dispatchGroup: DispatchGroup = DispatchGroup()
-		fetchData(dispatchGroup){ _categories in
+		fetchData(dispatchGroup){ [weak self] (_categories: [Category]) in
 			categories = _categories
+			self?.filters = categories.map { $0.mapToFilter()}
 		}
 
 		fetchData(dispatchGroup, decoder: getDateDecoder()) {_listings in
-			listings = _listings
+			listingsResp = _listings
 		}
 
 		dispatchGroup.notify(queue: .main) { [weak self] in
 			var list = [Listing]()
-			for response in listings {
+			for response in listingsResp {
 				if let category = categories.first(where: { $0.id == response.categoryId }) {
-					list.append(Listing(id: response.id, category: category, title: response.title,
-										description: response.description, price: "\(response.price) €", //todo
-										image: response.image, creationDate: response.creationDate, isUrgent: response.isUrgent))
+					list.append(response.mapToDomain(with: category))
 				}
 			}
-			self?.listingsDeleagate?.onListingsFetched(list)
+			self?.listings = list.sorted { lhs, rhs -> Bool in
+				lhs.creationDate > rhs.creationDate
+			}
 		}
 	}
 
@@ -76,4 +101,9 @@ final class ClassifiedRepo {
 			return nil
 		}
 	}
+}
+
+struct Filter: Equatable {
+	let categoryName: String
+	var isSelected: Bool = false
 }

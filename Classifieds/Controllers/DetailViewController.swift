@@ -12,10 +12,11 @@ class DetailViewController: UIViewController {
 	private let listing: Listing
 
 	var picture: UIImageView = CustomImageView()
-	var titleLabel : UILabel = CustomLabel()
-	var priceLabel : UILabel = CustomLabel()
-	var descriptionLabel : UILabel = CustomLabel(font: Font(.helveticaNeueLight, size: .h16))
-	var createdAtLabel : UILabel = CustomLabel(color: Color.GrayMidDark, font: Font(.helveticaNeueMedium, size: .h16))
+	var titleLabel: UILabel = CustomLabel()
+	var priceLabel: UILabel = CustomLabel()
+	var descriptionLabel: UILabel = CustomLabel(font: Font(.helveticaNeueLight, size: .h16))
+	var createdAtLabel: UILabel = CustomLabel(color: Color.GrayMidDark, font: Font(.helveticaNeueMedium, size: .h16))
+	var urgentLabel = PaddingLabel(text: "urgent")
 
 	let contentView = UIView()
 
@@ -69,6 +70,7 @@ class DetailViewController: UIViewController {
 		scrollView.addSubview(contentView)
 
 		contentView.addSubview(picture)
+		contentView.addSubview(urgentLabel)
 		contentView.addSubview(titleLabel)
 		contentView.addSubview(priceLabel)
 		contentView.addSubview(createdAtLabel)
@@ -88,6 +90,9 @@ class DetailViewController: UIViewController {
 			picture.centerXAnchor.constraint(equalTo: scrollView.centerXAnchor),
 			picture.widthAnchor.constraint(equalTo: contentView.widthAnchor),
 			picture.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
+
+			urgentLabel.leadingAnchor.constraint(equalTo: picture.leadingAnchor, constant: 20),
+			urgentLabel.topAnchor.constraint(equalTo: picture.topAnchor, constant: 10),
 
 			titleLabel.centerXAnchor.constraint(equalTo: scrollView.centerXAnchor),
 			titleLabel.topAnchor.constraint(equalTo: picture.bottomAnchor, constant: 20),

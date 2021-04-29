@@ -8,23 +8,22 @@
 import UIKit
 
 class MainViewController: UIViewController {
+	weak var filterDeleagate: FilterDelegate?
+
 	let activityIndicator = UIActivityIndicatorView(style: .whiteLarge)
 	let tableView = UITableView()
 	
 	private let repo = ClassifiedRepo()
 	private var listings = [Listing]()
 
-	override func loadView() {
-		super.loadView()
-		//setupTableView()
-	}
-
-    override func viewDidLoad() {
+	override func viewDidLoad() {
         super.viewDidLoad()
 
 		initView()
 
 		repo.listingsDeleagate = self
+		repo.filterDeleagate = self
+
 		repo.fetchListings()
     }
 
@@ -32,7 +31,6 @@ class MainViewController: UIViewController {
 		view.addSubview(tableView)
 
 		tableView.translatesAutoresizingMaskIntoConstraints = false
-
 		tableView.register(ListingCell.self, forCellReuseIdentifier: ListingCell.identifier)
 
 		NSLayoutConstraint.activate([
@@ -51,14 +49,8 @@ class MainViewController: UIViewController {
 		tableView.delegate = self
 	}
 
-	private func updateUI(_ listings: [ListingsResponse]) {
-		print(listings)
-	}
-
 	private func initView() {
 		title = "Annonces"
-		navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Filtrer", style: .plain, target: self, action: #selector(presentFilters))
-
 		view.addSubview(activityIndicator)
 
 		setupTableView()
@@ -73,8 +65,10 @@ class MainViewController: UIViewController {
 	@objc
 	private func presentFilters() {
 		let navigationController = UINavigationController()
-		navigationController.viewControllers = [FilterViewController()]
-		present(navigationController, animated: true, completion: nil) //todo apply completion to filter
+		let filtersVC = FilterViewController(filters: repo.filters)
+		filtersVC.filterDeleagate = self
+		navigationController.viewControllers = [filtersVC]
+		present(navigationController, animated: true, completion: nil)
 	}
 }
 
@@ -114,7 +108,16 @@ extension MainViewController : ListingsDelegate {
 
 	func onListingsFetched(_ listings: [Listing]) {
 		activityIndicator.stopAnimating()
+		navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Filtrer", style: .plain, target: self, action: #selector(presentFilters))
 		self.listings = listings
 		tableView.reloadData()
+	}
+}
+
+
+
+extension MainViewController: FilterDelegate {
+	func applyFilters(_ filters: [Filter]) {
+		repo.filters = filters
 	}
 }

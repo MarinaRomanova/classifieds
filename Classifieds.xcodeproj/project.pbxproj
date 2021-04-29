@@ -30,6 +30,7 @@
 		C6A9830B2639583E0078F72C /* CustomLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6A9830A2639583E0078F72C /* CustomLabel.swift */; };
 		C6E6B6E1263992E60032E6D1 /* CustomImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6E6B6E0263992E60032E6D1 /* CustomImageView.swift */; };
 		C6E6B6E6263998880032E6D1 /* FilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6E6B6E5263998880032E6D1 /* FilterViewController.swift */; };
+		C6E6B6EB263AAC7C0032E6D1 /* PaddingLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6E6B6EA263AAC7C0032E6D1 /* PaddingLabel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -79,6 +80,7 @@
 		C6A9830A2639583E0078F72C /* CustomLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomLabel.swift; sourceTree = "<group>"; };
 		C6E6B6E0263992E60032E6D1 /* CustomImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomImageView.swift; sourceTree = "<group>"; };
 		C6E6B6E5263998880032E6D1 /* FilterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterViewController.swift; sourceTree = "<group>"; };
+		C6E6B6EA263AAC7C0032E6D1 /* PaddingLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaddingLabel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -166,6 +168,7 @@
 				C6A982CF26386BAD0078F72C /* ListingCell.swift */,
 				C6A9830A2639583E0078F72C /* CustomLabel.swift */,
 				C6E6B6E0263992E60032E6D1 /* CustomImageView.swift */,
+				C6E6B6EA263AAC7C0032E6D1 /* PaddingLabel.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -356,6 +359,7 @@
 				C6E6B6E1263992E60032E6D1 /* CustomImageView.swift in Sources */,
 				C6A982C326385B330078F72C /* CachManager.swift in Sources */,
 				C6E6B6E6263998880032E6D1 /* FilterViewController.swift in Sources */,
+				C6E6B6EB263AAC7C0032E6D1 /* PaddingLabel.swift in Sources */,
 				C6A98271263840AA0078F72C /* Appearance.swift in Sources */,
 				C6A9828B263845C80078F72C /* MainViewController.swift in Sources */,
 				C6A982D026386BAD0078F72C /* ListingCell.swift in Sources */,

@@ -11,3 +11,9 @@ struct Category: Decodable {
 	let id: Int
 	let name: String
 }
+
+extension Category {
+	func mapToFilter() -> Filter {
+		Filter(categoryName: name)
+	}
+}
