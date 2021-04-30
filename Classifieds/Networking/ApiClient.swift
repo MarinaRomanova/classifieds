@@ -12,8 +12,11 @@ enum CustomResult<Value> {
 	case failure(Error?)
 }
 
-final class ApiClient {
-	class func fetch<T: Decodable>(_ route: Route, decoder: JSONDecoder,
+final class ApiClient: Api {
+	private init() { }
+	static let shared = ApiClient()
+
+	func fetch<T: Decodable>(_ route: Route, decoder: JSONDecoder,
 								   completion: @escaping (CustomResult<[T]>) -> Void) {
 		do {
 			let request = try route.asURLRequest()
@@ -40,5 +43,18 @@ final class ApiClient {
 		} catch {
 			completion(.failure(error))
 		}
+	}
+}
+
+protocol  Api {
+	func fetch<T: Decodable>(_ route: Route, decoder: JSONDecoder,
+							 completion: @escaping (CustomResult<[T]>) -> Void)
+}
+
+extension Api {
+	func getDateDecoder() -> JSONDecoder {
+		let decoder = JSONDecoder()
+		decoder.dateDecodingStrategy = .iso8601
+		return decoder
 	}
 }

@@ -13,8 +13,17 @@ class MainViewController: UIViewController {
 	let activityIndicator = UIActivityIndicatorView(style: .whiteLarge)
 	let tableView = UITableView()
 	
-	private let repo = ClassifiedRepo()
-	private var listings = [Listing]()
+	let repo: ClassifiedRepo
+	var listings = [Listing]()
+
+	init(repo: ClassifiedRepo = ClassifiedRepo(apiClient: ApiClient.shared) ) {
+		self.repo = repo
+		super.init(nibName: nil, bundle: nil)
+	}
+
+	required init?(coder aDecoder: NSCoder) {
+		fatalError("init(coder:) has not been implemented")
+	}
 
 	override func viewDidLoad() {
         super.viewDidLoad()

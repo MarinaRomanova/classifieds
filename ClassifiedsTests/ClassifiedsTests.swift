@@ -9,25 +9,25 @@ import XCTest
 @testable import Classifieds
 
 class ClassifiedsTests: XCTestCase {
+	private var apiClient: MockClient!
+	private var repo: ClassifiedRepo!
+	private var controller: MainViewController!
 
     override func setUpWithError() throws {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
+		let testBundle = Bundle(for: type(of: self))
+		apiClient = MockClient(bundle: testBundle)
+		repo = ClassifiedRepo(apiClient: apiClient)
+
+		controller = MainViewController(repo: repo)
     }
 
     override func tearDownWithError() throws {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
     }
 
-    func testExample() throws {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-    }
-
-    func testPerformanceExample() throws {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
-        }
-    }
-
+	func testContoller_loadedView() throws {
+		XCTAssertNotNil(controller.repo)
+		XCTAssertEqual(controller.listings.count, 0)
+		XCTAssertEqual(controller.listings.count, 0)
+		XCTAssertNotNil(controller.tableView)
+	}
 }

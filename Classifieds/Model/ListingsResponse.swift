@@ -26,11 +26,6 @@ struct ListingsResponse: Decodable {
 	}
 }
 
-struct ListingImage: Decodable {
-	let small: String?
-	let thumb: String?
-}
-
 extension ListingsResponse {
 	func mapToDomain(with category: Category) -> Listing {
 		Listing(id: self.id, category: category, title: self.title,

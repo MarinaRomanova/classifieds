@@ -7,19 +7,15 @@
 
 import Foundation
 
-protocol ListingsDelegate: AnyObject {
-	func onLoadingStarted()
-	func onError(error: Error)
-	func onListingsFetched(_ listings: [Listing])
-}
-
-protocol FilterDelegate: AnyObject {
-	func applyFilters(_ filter: [Filter])
-}
-
-final class ClassifiedRepo {
+final class ClassifiedRepo: ClassifiedDataSource{
 	weak var listingsDeleagate: ListingsDelegate?
 	weak var filterDeleagate: FilterDelegate?
+
+	private let apiClient: Api
+
+	init(apiClient: Api) {
+		self.apiClient = apiClient
+	}
 
 	var filters: [Filter] = [] {
 		didSet {
@@ -52,7 +48,7 @@ final class ClassifiedRepo {
 			self?.filters = categories.map { $0.mapToFilter()}
 		}
 
-		fetchData(dispatchGroup, decoder: getDateDecoder()) {_listings in
+		fetchData(dispatchGroup, decoder: apiClient.getDateDecoder()) {_listings in
 			listingsResp = _listings
 		}
 
@@ -77,17 +73,11 @@ final class ClassifiedRepo {
 		}
 	}
 
-	private func getDateDecoder() -> JSONDecoder {
-		let decoder = JSONDecoder()
-		decoder.dateDecodingStrategy = .iso8601
-		return decoder
-	}
-
 	private func fetchData<T: Decodable>(_ dispatchGroup: DispatchGroup,
 										 decoder: JSONDecoder = JSONDecoder(),
 										 completion: @escaping ([T]) -> Void) {
 		dispatchGroup.enter()
-		ApiClient.fetch(getRoute(for: T.self)!, decoder: decoder,
+		apiClient.fetch(getRoute(for: T.self)!, decoder: decoder,
 						completion: { (results: CustomResult<[T]>) in
 			switch results {
 			case .success(let items):
@@ -99,7 +89,7 @@ final class ClassifiedRepo {
 		})
 	}
 
-	func getRoute<T: Decodable>(for type: T.Type) -> Route? {
+	private func getRoute<T: Decodable>(for type: T.Type) -> Route? {
 		switch T.self {
 		case is ListingsResponse.Type:
 			return Routes.listings
@@ -111,7 +101,20 @@ final class ClassifiedRepo {
 	}
 }
 
-struct Filter: Equatable {
-	let categoryName: String
-	var isSelected: Bool = false
+protocol ListingsDelegate: AnyObject {
+	func onLoadingStarted()
+	func onError(error: Error)
+	func onListingsFetched(_ listings: [Listing])
+}
+
+protocol FilterDelegate: AnyObject {
+	func applyFilters(_ filter: [Filter])
+}
+
+protocol ClassifiedDataSource {
+	var listingsDeleagate: ListingsDelegate? { get set }
+	var filterDeleagate: FilterDelegate? { get set }
+	var filters: [Filter] { get set}
+	var listings:[Listing] { get }
+	func fetchListings()
 }
