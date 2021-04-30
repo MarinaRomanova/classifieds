@@ -11,9 +11,11 @@
 		C64414FA263BF68000A74BD5 /* XCTestCase+extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C64414F9263BF68000A74BD5 /* XCTestCase+extensions.swift */; };
 		C6441502263C01E800A74BD5 /* Filter.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6441501263C01E800A74BD5 /* Filter.swift */; };
 		C6441507263C023F00A74BD5 /* ListingImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6441506263C023F00A74BD5 /* ListingImage.swift */; };
+		C6441512263C07BD00A74BD5 /* FilterVCTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6441511263C07BD00A74BD5 /* FilterVCTests.swift */; };
+		C644151A263C22B600A74BD5 /* MainControllerUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6441519263C22B600A74BD5 /* MainControllerUITests.swift */; };
 		C6A9823726383FE10078F72C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6A9823626383FE10078F72C /* AppDelegate.swift */; };
 		C6A9824026383FE30078F72C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C6A9823F26383FE30078F72C /* Assets.xcassets */; };
-		C6A9824E26383FE30078F72C /* ClassifiedsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6A9824D26383FE30078F72C /* ClassifiedsTests.swift */; };
+		C6A9824E26383FE30078F72C /* MainVCTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6A9824D26383FE30078F72C /* MainVCTests.swift */; };
 		C6A9825926383FE30078F72C /* ClassifiedsUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6A9825826383FE30078F72C /* ClassifiedsUITests.swift */; };
 		C6A98271263840AA0078F72C /* Appearance.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6A98270263840AA0078F72C /* Appearance.swift */; };
 		C6A982792638416E0078F72C /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6A982782638416E0078F72C /* Color.swift */; };
@@ -65,12 +67,14 @@
 		C64414F9263BF68000A74BD5 /* XCTestCase+extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XCTestCase+extensions.swift"; sourceTree = "<group>"; };
 		C6441501263C01E800A74BD5 /* Filter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Filter.swift; sourceTree = "<group>"; };
 		C6441506263C023F00A74BD5 /* ListingImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListingImage.swift; sourceTree = "<group>"; };
+		C6441511263C07BD00A74BD5 /* FilterVCTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterVCTests.swift; sourceTree = "<group>"; };
+		C6441519263C22B600A74BD5 /* MainControllerUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainControllerUITests.swift; sourceTree = "<group>"; };
 		C6A9823326383FE10078F72C /* Classifieds.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Classifieds.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C6A9823626383FE10078F72C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C6A9823F26383FE30078F72C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C6A9824426383FE30078F72C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C6A9824926383FE30078F72C /* ClassifiedsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ClassifiedsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		C6A9824D26383FE30078F72C /* ClassifiedsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClassifiedsTests.swift; sourceTree = "<group>"; };
+		C6A9824D26383FE30078F72C /* MainVCTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainVCTests.swift; sourceTree = "<group>"; };
 		C6A9824F26383FE30078F72C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C6A9825426383FE30078F72C /* ClassifiedsUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ClassifiedsUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		C6A9825826383FE30078F72C /* ClassifiedsUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClassifiedsUITests.swift; sourceTree = "<group>"; };
@@ -175,7 +179,8 @@
 			isa = PBXGroup;
 			children = (
 				C64414F3263BF5E400A74BD5 /* ClassifiedsRepoTests.swift */,
-				C6A9824D26383FE30078F72C /* ClassifiedsTests.swift */,
+				C6A9824D26383FE30078F72C /* MainVCTests.swift */,
+				C6441511263C07BD00A74BD5 /* FilterVCTests.swift */,
 				C6A9824F26383FE30078F72C /* Info.plist */,
 				C64414F8263BF66E00A74BD5 /* Utils */,
 				C6E6B70E263AEA390032E6D1 /* MockData */,
@@ -186,8 +191,9 @@
 		C6A9825726383FE30078F72C /* ClassifiedsUITests */ = {
 			isa = PBXGroup;
 			children = (
-				C6A9825826383FE30078F72C /* ClassifiedsUITests.swift */,
 				C6A9825A26383FE30078F72C /* Info.plist */,
+				C6A9825826383FE30078F72C /* ClassifiedsUITests.swift */,
+				C6441519263C22B600A74BD5 /* MainControllerUITests.swift */,
 			);
 			path = ClassifiedsUITests;
 			sourceTree = "<group>";
@@ -420,8 +426,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C6441512263C07BD00A74BD5 /* FilterVCTests.swift in Sources */,
 				C64414F4263BF5E400A74BD5 /* ClassifiedsRepoTests.swift in Sources */,
-				C6A9824E26383FE30078F72C /* ClassifiedsTests.swift in Sources */,
+				C6A9824E26383FE30078F72C /* MainVCTests.swift in Sources */,
 				C6E6B6FF263AE5D10032E6D1 /* MockClient.swift in Sources */,
 				C64414FA263BF68000A74BD5 /* XCTestCase+extensions.swift in Sources */,
 				C6E6B704263AE66E0032E6D1 /* MockManager.swift in Sources */,
@@ -432,6 +439,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C644151A263C22B600A74BD5 /* MainControllerUITests.swift in Sources */,
 				C6A9825926383FE30078F72C /* ClassifiedsUITests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

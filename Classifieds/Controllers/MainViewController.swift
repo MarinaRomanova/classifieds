@@ -30,7 +30,7 @@ class MainViewController: UIViewController {
 
 		initView()
 
-		repo.listingsDeleagate = self
+		repo.listingsDelegate = self
 		repo.filterDeleagate = self
 
 		repo.fetchListings()
@@ -52,7 +52,7 @@ class MainViewController: UIViewController {
 		tableView.rowHeight = 160
 		tableView.estimatedRowHeight = 160
 		tableView.separatorStyle = .none
-		tableView.accessibilityIdentifier = "tableView"
+		tableView.accessibilityIdentifier = "listingsTableView"
 		
 		tableView.dataSource = self
 		tableView.delegate = self

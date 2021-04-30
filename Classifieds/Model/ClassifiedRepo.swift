@@ -8,7 +8,7 @@
 import Foundation
 
 final class ClassifiedRepo: ClassifiedDataSource{
-	weak var listingsDeleagate: ListingsDelegate?
+	weak var listingsDelegate: ListingsDelegate?
 	weak var filterDeleagate: FilterDelegate?
 
 	private let apiClient: Api
@@ -22,10 +22,10 @@ final class ClassifiedRepo: ClassifiedDataSource{
 			if oldValue != filters {
 				let selectedFilters = filters.filter({ $0.isSelected })
 				if selectedFilters.isEmpty {
-					listingsDeleagate?.onListingsFetched(listings)
+					listingsDelegate?.onListingsFetched(listings)
 				} else {
 					let _listings = listings.filter({ selectedFilters.map{$0.categoryName}.contains($0.category.name) })
-					listingsDeleagate?.onListingsFetched(_listings)
+					listingsDelegate?.onListingsFetched(_listings)
 				}
 			}
 		}
@@ -33,14 +33,14 @@ final class ClassifiedRepo: ClassifiedDataSource{
 
 	private(set) var listings = [Listing]() {
 		didSet {
-			listingsDeleagate?.onListingsFetched(listings)
+			listingsDelegate?.onListingsFetched(listings)
 		}
 	}
 
 	func fetchListings() {
 		var categories = [Category]()
 		var listingsResp = [ListingsResponse]()
-		listingsDeleagate?.onLoadingStarted()
+		listingsDelegate?.onLoadingStarted()
 
 		let dispatchGroup: DispatchGroup = DispatchGroup()
 		fetchData(dispatchGroup){ [weak self] (_categories: [Category]) in
@@ -112,7 +112,7 @@ protocol FilterDelegate: AnyObject {
 }
 
 protocol ClassifiedDataSource {
-	var listingsDeleagate: ListingsDelegate? { get set }
+	var listingsDelegate: ListingsDelegate? { get set }
 	var filterDeleagate: FilterDelegate? { get set }
 	var filters: [Filter] { get set}
 	var listings:[Listing] { get }

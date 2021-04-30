@@ -23,6 +23,7 @@ class FilterViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 		title = "Categories"
+		tableView.accessibilityIdentifier = "filtersTableView"
 		tableView.register(UITableViewCell.self, forCellReuseIdentifier: UITableViewCell.identifier)
 		tableView.tintColor = Color.Orange
 
@@ -37,7 +38,7 @@ class FilterViewController: UITableViewController {
 
 	@objc
 	private func resetFilters() {
-		for i in 0...filters.count - 1 {
+		for i in 0..<filters.count {
 			filters[i].isSelected = false
 		}
 		tableView.reloadData()
