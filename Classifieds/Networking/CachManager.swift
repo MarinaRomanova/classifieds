@@ -8,12 +8,13 @@
 import UIKit
 
 class CachManager {
-	static var cache = NSCache<NSString, NSData>()
-
-	class func setImageCache(_ url: String, _ data: Data) {
-		cache.setObject(NSData(data: data), forKey: url as NSString)
+	class func checkNetworkCache(request: URLRequest) -> Data? {
+		if let cachedResponse = URLSession.shared.configuration.urlCache?.cachedResponse(for: request),
+		   let httpResponse = cachedResponse.response as? HTTPURLResponse {
+			if httpResponse.statusCode < 400 {
+				return cachedResponse.data
+			}
+		}
+		return nil
 	}
-
-	class func getImageCache(_ url: String) -> Data? {
-		cache.object(forKey: url as NSString) as Data?	}
 }

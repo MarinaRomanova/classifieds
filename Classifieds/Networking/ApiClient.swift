@@ -21,6 +21,14 @@ final class ApiClient: Api {
 		do {
 			let request = try route.asURLRequest()
 
+			if let cache = CachManager.checkNetworkCache(request: request) {
+				let decodedResponse = try decoder.decode([T].self, from: cache)
+				DispatchQueue.main.async {
+					completion(.success(decodedResponse))
+				}
+				return
+			}
+
 			let task = URLSession.shared.dataTask(with: request) { data, _, error in
 				guard let data = data, error == nil else {
 					DispatchQueue.main.async {
