@@ -1,0 +1,15 @@
+/* 
+  Localizable.strings
+  Classifieds
+
+  Created by Marina Romanova on 01/05/2021.
+  
+*/
+"listings.title" = "Annonces";
+"listings.nav.filter" = "Filtrer";
+
+"listings.urgent" = "Urgent";
+
+"categories.title" = "Catégories";
+"categories.nav.ok" = "OK";
+"categories.nav.reset" = "Réinitialiser";

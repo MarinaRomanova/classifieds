@@ -14,21 +14,20 @@ class MainControllerUITests: ClassifiedsUITests {
 
 		app.tables["listingsTableView"].cells.allElementsBoundByIndex[4].tap()
 		app.scrollViews.firstMatch.tap()
-		app.navigationBars.firstMatch.buttons["Annonces"].tap()
+		app.navigationBars.buttons["listings.title"].tap()
 		app.tables.firstMatch.tap()
 	}
 
 	func testNavigateToFilters() {
 		start()
-		app.navigationBars.firstMatch.buttons["Filtrer"].tap()
+		app.navigationBars.firstMatch.buttons["listings.nav.filter"].tap()
 
 		let tablesQuery = app.tables["filtersTableView"]
-		tablesQuery/*@START_MENU_TOKEN@*/.staticTexts["Multimédia"]/*[[".cells.staticTexts[\"Multimédia\"]",".staticTexts[\"Multimédia\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.tap()
-		tablesQuery/*@START_MENU_TOKEN@*/.staticTexts["Service"]/*[[".cells.staticTexts[\"Service\"]",".staticTexts[\"Service\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.tap()
+		tablesQuery.staticTexts["Multimédia"].tap()
+		tablesQuery.staticTexts["Service"].tap()
 
-		let navBar = app.navigationBars["Categories"]
-		navBar.buttons["Reset"].tap()
-		navBar.buttons["OK"].tap()
+		app.navigationBars.buttons["categories.nav.reset"].tap()
+		app.navigationBars.buttons["OK"].tap()
 
 		app.tables["listingsTableView"].firstMatch.tap()
 	}
