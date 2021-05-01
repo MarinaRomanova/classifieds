@@ -16,7 +16,7 @@ class DetailViewController: UIViewController {
 	var priceLabel: UILabel = CustomLabel()
 	var descriptionLabel: UILabel = CustomLabel(font: Font(.helveticaNeueLight, size: .h16))
 	var createdAtLabel: UILabel = CustomLabel(color: Color.GrayMidDark, font: Font(.helveticaNeueLight, size: .h16))
-	var urgentLabel = PaddingLabel(text: "urgent")
+	var urgentLabel = PaddingLabel(text: "listings.urgent".localized())
 
 	let contentView: UIStackView = {
 		let content = UIStackView()

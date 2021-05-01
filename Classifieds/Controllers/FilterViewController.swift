@@ -22,14 +22,24 @@ class FilterViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-		title = "Categories"
+
+		initialize()
+    }
+
+	private func initialize() {
+		title = "categories.title".localized()
+		navigationItem.accessibilityLabel = "categories.title"
+
 		tableView.accessibilityIdentifier = "filtersTableView"
 		tableView.register(UITableViewCell.self, forCellReuseIdentifier: UITableViewCell.identifier)
 		tableView.tintColor = Color.Orange
 
-		navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Reset", style: .plain, target: self, action: #selector(resetFilters))
-		navigationItem.leftBarButtonItem = UIBarButtonItem(title: "OK", style: .plain, target: self, action: #selector(applyFilters))
-    }
+		navigationItem.rightBarButtonItem = UIBarButtonItem(title: "categories.nav.reset".localized(), style: .plain, target: self, action: #selector(resetFilters))
+		navigationItem.rightBarButtonItem?.accessibilityIdentifier = "categories.nav.reset"
+
+		navigationItem.leftBarButtonItem = UIBarButtonItem(title: "categories.nav.ok".localized(), style: .plain, target: self, action: #selector(applyFilters))
+		navigationItem.leftBarButtonItem?.accessibilityIdentifier = "categories.nav.ok"
+	}
 
 	@objc
 	private func applyFilters() {

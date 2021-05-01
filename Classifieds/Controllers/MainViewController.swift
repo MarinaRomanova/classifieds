@@ -67,7 +67,8 @@ class MainViewController: UIViewController {
 
 	private func initView() {
 		view.backgroundColor = Color.GrayMidLight
-		title = "Annonces"
+		title = "listings.title".localized()
+		navigationItem.accessibilityLabel = "listings.title"
 
 		setupTableView()
 		view.addSubview(activityIndicator)
@@ -126,7 +127,8 @@ extension MainViewController: ListingsDelegate {
 
 		activityIndicator.stopAnimating()
 		guard !listings.isEmpty else { return }
-		navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Filtrer", style: .plain, target: self, action: #selector(presentFilters))
+		navigationItem.rightBarButtonItem = UIBarButtonItem(title: "listings.nav.filter".localized(), style: .plain, target: self, action: #selector(presentFilters))
+		navigationItem.rightBarButtonItem?.accessibilityIdentifier = "listings.nav.filter"
 		self.listings = listings
 		tableView.reloadData()
 	}
