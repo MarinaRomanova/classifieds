@@ -1,4 +1,4 @@
-# Classifieds
+# Classifieds ![Bitrise](https://app.bitrise.io/app/5a22b06be219896e/status.svg?token=2hp0_AvukhNWjGlY7oZnCQ&branch=main)
 
 Simple app with MVC architecture
 
@@ -23,4 +23,3 @@ Model is represented by `ClassifiedsRepo` class. After `ApiClient` has fetched d
 ## Screenshots
 
 <img src="https://user-images.githubusercontent.com/36896406/116721796-0401e900-a9de-11eb-93b4-bb6cba8d58ba.png" height="450"/>  <img src="https://user-images.githubusercontent.com/36896406/116721817-06644300-a9de-11eb-8900-7c179926602c.png" height="450"/>  <img src="https://user-images.githubusercontent.com/36896406/116721830-082e0680-a9de-11eb-8524-e68d5576d9ad.png" height="450"/>
-
