@@ -10,7 +10,14 @@ import UIKit
 class MainViewController: UIViewController {
 	weak var filterDeleagate: FilterDelegate?
 
-	let activityIndicator = UIActivityIndicatorView(style: .whiteLarge)
+	let activityIndicator: UIActivityIndicatorView = {
+		let indicator = UIActivityIndicatorView(style: .whiteLarge)
+		indicator.translatesAutoresizingMaskIntoConstraints = false
+		indicator.color = Color.Orange
+		indicator.hidesWhenStopped = true
+		return indicator
+	}()
+
 	let tableView = UITableView()
 
 	let repo: ClassifiedRepo
@@ -61,11 +68,10 @@ class MainViewController: UIViewController {
 	private func initView() {
 		view.backgroundColor = Color.GrayMidLight
 		title = "Annonces"
-		view.addSubview(activityIndicator)
 
 		setupTableView()
+		view.addSubview(activityIndicator)
 
-		activityIndicator.translatesAutoresizingMaskIntoConstraints = false
 		NSLayoutConstraint.activate([
 			activityIndicator.centerYAnchor.constraint(equalTo: view.centerYAnchor),
 			activityIndicator.centerXAnchor.constraint(equalTo: view.centerXAnchor)
@@ -109,7 +115,6 @@ extension MainViewController: UITableViewDataSource {
 extension MainViewController: ListingsDelegate {
 	func onLoadingStarted() {
 		activityIndicator.startAnimating()
-
 	}
 
 	func onError(error: Error) {
@@ -117,10 +122,21 @@ extension MainViewController: ListingsDelegate {
 	}
 
 	func onListingsFetched(_ listings: [Listing]) {
+		scrollToTopIfNeeded()
+
 		activityIndicator.stopAnimating()
+		guard !listings.isEmpty else { return }
 		navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Filtrer", style: .plain, target: self, action: #selector(presentFilters))
 		self.listings = listings
 		tableView.reloadData()
+	}
+
+	private func scrollToTopIfNeeded() {
+		if !self.listings.isEmpty {
+			tableView.isHidden = true
+			tableView.scrollToRow(at: IndexPath(item: 0, section: 0), at: .top, animated: false)
+			tableView.isHidden = false
+		}
 	}
 }
 

@@ -18,13 +18,20 @@ class DetailViewController: UIViewController {
 	var createdAtLabel: UILabel = CustomLabel(color: Color.GrayMidDark, font: Font(.helveticaNeueLight, size: .h16))
 	var urgentLabel = PaddingLabel(text: "urgent")
 
-	let contentView = UIView()
+	let contentView: UIStackView = {
+		let content = UIStackView()
+		content.translatesAutoresizingMaskIntoConstraints = false
+		content.spacing = 20
+		content.axis = .vertical
+		return content
+	}()
 
 	var scrollView: UIScrollView = {
 		let scrollView = UIScrollView()
 		scrollView.translatesAutoresizingMaskIntoConstraints = false
 		scrollView.isScrollEnabled = true
-		return scrollView //TODO problem scrolling
+		scrollView.showsVerticalScrollIndicator = false
+		return scrollView
 	}()
 
 	init(listing: Listing) {
@@ -71,15 +78,14 @@ class DetailViewController: UIViewController {
 	}
 
 	func initialize() {
-		contentView.translatesAutoresizingMaskIntoConstraints = false
 		view.addSubview(scrollView)
 		scrollView.addSubview(contentView)
 
-		contentView.addSubview(picture)
-		contentView.addSubview(titleLabel)
-		contentView.addSubview(priceLabel)
-		contentView.addSubview(createdAtLabel)
-		contentView.addSubview(descriptionLabel)
+		contentView.addArrangedSubview(picture)
+		contentView.addArrangedSubview(titleLabel)
+		contentView.addArrangedSubview(priceLabel)
+		contentView.addArrangedSubview(createdAtLabel)
+		contentView.addArrangedSubview(descriptionLabel)
 
 		NSLayoutConstraint.activate([
 			scrollView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
@@ -88,30 +94,9 @@ class DetailViewController: UIViewController {
 			scrollView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20),
 
 			contentView.centerXAnchor.constraint(equalTo: scrollView.centerXAnchor),
-			contentView.widthAnchor.constraint(equalTo: scrollView.widthAnchor),
+			contentView.widthAnchor.constraint(equalTo: view.widthAnchor, constant: -40),
 			contentView.topAnchor.constraint(equalTo: scrollView.topAnchor),
-			contentView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
-
-			picture.centerXAnchor.constraint(equalTo: scrollView.centerXAnchor),
-			picture.widthAnchor.constraint(equalTo: contentView.widthAnchor),
-			picture.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
-
-			titleLabel.centerXAnchor.constraint(equalTo: scrollView.centerXAnchor),
-			titleLabel.topAnchor.constraint(equalTo: picture.bottomAnchor, constant: 20),
-			titleLabel.leadingAnchor.constraint(equalTo: picture.leadingAnchor),
-			titleLabel.trailingAnchor.constraint(equalTo: picture.trailingAnchor),
-
-			priceLabel.centerXAnchor.constraint(equalTo: scrollView.centerXAnchor),
-			priceLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 20),
-			priceLabel.widthAnchor.constraint(equalTo: contentView.widthAnchor),
-
-			createdAtLabel.centerXAnchor.constraint(equalTo: scrollView.centerXAnchor),
-			createdAtLabel.topAnchor.constraint(equalTo: priceLabel.bottomAnchor, constant: 20),
-			createdAtLabel.widthAnchor.constraint(equalTo: contentView.widthAnchor),
-
-			descriptionLabel.centerXAnchor.constraint(equalTo: scrollView.centerXAnchor),
-			descriptionLabel.topAnchor.constraint(equalTo: createdAtLabel.bottomAnchor, constant: 40),
-			descriptionLabel.widthAnchor.constraint(equalTo: contentView.widthAnchor)
+			contentView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor)
 		])
 	}
 }
