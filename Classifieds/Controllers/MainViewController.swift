@@ -12,7 +12,7 @@ class MainViewController: UIViewController {
 
 	let activityIndicator = UIActivityIndicatorView(style: .whiteLarge)
 	let tableView = UITableView()
-	
+
 	let repo: ClassifiedRepo
 	var listings = [Listing]()
 
@@ -53,7 +53,7 @@ class MainViewController: UIViewController {
 		tableView.estimatedRowHeight = 160
 		tableView.separatorStyle = .none
 		tableView.accessibilityIdentifier = "listingsTableView"
-		
+
 		tableView.dataSource = self
 		tableView.delegate = self
 	}
@@ -82,8 +82,8 @@ class MainViewController: UIViewController {
 	}
 }
 
-//MARK: = UITableViewDelegate
-extension MainViewController : UITableViewDelegate {
+// MARK: = UITableViewDelegate
+extension MainViewController: UITableViewDelegate {
 	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 		let listing = listings[indexPath.row]
 		let nav = UINavigationController()
@@ -92,8 +92,8 @@ extension MainViewController : UITableViewDelegate {
 	}
 }
 
-//MARK: = UITableViewDataSource
-extension MainViewController : UITableViewDataSource {
+// MARK: = UITableViewDataSource
+extension MainViewController: UITableViewDataSource {
 	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 		listings.count
 	}
@@ -106,7 +106,7 @@ extension MainViewController : UITableViewDataSource {
 	}
 }
 
-extension MainViewController : ListingsDelegate {
+extension MainViewController: ListingsDelegate {
 	func onLoadingStarted() {
 		activityIndicator.startAnimating()
 
@@ -123,8 +123,6 @@ extension MainViewController : ListingsDelegate {
 		tableView.reloadData()
 	}
 }
-
-
 
 extension MainViewController: FilterDelegate {
 	func applyFilters(_ filters: [Filter]) {

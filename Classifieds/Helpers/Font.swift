@@ -67,4 +67,3 @@ extension Font {
 		return font
 	}
 }
-

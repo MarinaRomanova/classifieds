@@ -7,7 +7,7 @@
 
 import Foundation
 
-final class ClassifiedRepo: ClassifiedDataSource{
+final class ClassifiedRepo: ClassifiedDataSource {
 	weak var listingsDelegate: ListingsDelegate?
 	weak var filterDeleagate: FilterDelegate?
 
@@ -24,7 +24,7 @@ final class ClassifiedRepo: ClassifiedDataSource{
 				if selectedFilters.isEmpty {
 					listingsDelegate?.onListingsFetched(listings)
 				} else {
-					let _listings = listings.filter({ selectedFilters.map{$0.categoryName}.contains($0.category.name) })
+					let _listings = listings.filter({ selectedFilters.map {$0.categoryName}.contains($0.category.name) })
 					listingsDelegate?.onListingsFetched(_listings)
 				}
 			}
@@ -43,7 +43,7 @@ final class ClassifiedRepo: ClassifiedDataSource{
 		listingsDelegate?.onLoadingStarted()
 
 		let dispatchGroup: DispatchGroup = DispatchGroup()
-		fetchData(dispatchGroup){ [weak self] (_categories: [Category]) in
+		fetchData(dispatchGroup) { [weak self] (_categories: [Category]) in
 			categories = _categories
 			self?.filters = categories.map { $0.mapToFilter()}
 		}
@@ -82,7 +82,7 @@ final class ClassifiedRepo: ClassifiedDataSource{
 			switch results {
 			case .success(let items):
 				completion(items)
-			case .failure(_):
+			case .failure:
 				return
 			}
 			dispatchGroup.leave()
@@ -115,6 +115,6 @@ protocol ClassifiedDataSource {
 	var listingsDelegate: ListingsDelegate? { get set }
 	var filterDeleagate: FilterDelegate? { get set }
 	var filters: [Filter] { get set}
-	var listings:[Listing] { get }
+	var listings: [Listing] { get }
 	func fetchListings()
 }

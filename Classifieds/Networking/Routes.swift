@@ -11,7 +11,6 @@ enum Routes: Route {
 	case categories
 	case listings
 
-
 	var method: HTTPMethod {
 		switch self {
 		case .categories, .listings:
@@ -37,7 +36,6 @@ enum Routes: Route {
 
 		return request
 	}
-
 
 	private var BASE_URL: String {
 		"https://raw.githubusercontent.com/leboncoin/paperclip/master/"

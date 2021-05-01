@@ -16,7 +16,6 @@ enum Appearance {
 			appearance.backgroundColor = Color.Orange
 			appearance.shadowColor = Color.Clear
 
-
 			appearance.titleTextAttributes = [.foregroundColor: Color.White, .font: Font(.helveticaNeueMedium, size: .h18).instance]
 			appearance.largeTitleTextAttributes = [.foregroundColor: Color.White, .font: Font(.helveticaNeueMedium, size: .h22).instance]
 

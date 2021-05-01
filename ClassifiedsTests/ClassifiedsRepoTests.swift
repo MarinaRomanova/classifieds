@@ -27,7 +27,6 @@ class ClassifiedsRepoTests: XCTestCase {
 			XCTAssertEqual(self.repo.listings.count, 5)
 			XCTAssertEqual(self.repo.listings.first!.category.name, "Mode")
 
-
 			XCTAssertEqual(self.repo.filters.count, 11)
 			XCTAssertFalse(self.repo.filters.contains {$0.isSelected})
 		}

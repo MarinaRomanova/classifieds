@@ -116,7 +116,6 @@ class DetailViewController: UIViewController {
 	}
 }
 
-
 extension Date {
 	func getFormattedDate(format: String = "d MMM yyyy HH:mm") -> String {
 		let dateformat = DateFormatter()

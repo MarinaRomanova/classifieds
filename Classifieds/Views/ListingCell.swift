@@ -18,8 +18,8 @@ class ListingCell: UITableViewCell {
 		return indicator
 	}()
 
-	var titleLabel : UILabel = CustomLabel()
-	var priceLabel : UILabel = CustomLabel()
+	var titleLabel: UILabel = CustomLabel()
+	var priceLabel: UILabel = CustomLabel()
 	var categorieLabel: UILabel = CustomLabel(color: Color.GrayMidDark, font: Font(.helveticaNeueMedium, size: .h16))
 	var createdAtLabel: UILabel = CustomLabel(color: Color.GrayMidDark, font: Font(.helveticaNeueLight, size: .h14))
 	let urgentLabel = PaddingLabel(text: "urgent")
@@ -67,13 +67,13 @@ class ListingCell: UITableViewCell {
 
 		NSLayoutConstraint.activate([
 			picture.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
-			picture.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant:20),
-			picture.widthAnchor.constraint(equalToConstant:105),
-			picture.heightAnchor.constraint(equalToConstant:140),
+			picture.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
+			picture.widthAnchor.constraint(equalToConstant: 105),
+			picture.heightAnchor.constraint(equalToConstant: 140),
 
 			containerView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
-			containerView.leadingAnchor.constraint(equalTo: picture.trailingAnchor, constant:10),
-			containerView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant:-20),
+			containerView.leadingAnchor.constraint(equalTo: picture.trailingAnchor, constant: 10),
+			containerView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20),
 			containerView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -10),
 
 			titleLabel.topAnchor.constraint(equalTo: containerView.topAnchor),

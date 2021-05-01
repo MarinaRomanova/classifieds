@@ -10,14 +10,14 @@ import Foundation
 
 final class MockClient: Api {
 	private var bundle: Bundle
-	
+
 	init(bundle: Bundle) {
 		self.bundle = bundle
 	}
 
 	func fetch<T: Decodable>(_ route: Route, decoder: JSONDecoder,
 								   completion: @escaping (CustomResult<[T]>) -> Void) {
-		
+
 		if let value = MockManager.getJson(from: route, bundle: bundle) {
 			do {
 				let object: [T] = try Utils.decode(decoder: decoder, value: value)

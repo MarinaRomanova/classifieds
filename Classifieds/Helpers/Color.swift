@@ -37,7 +37,6 @@ enum Color {
 	/// #818B91
 	static let Gray2: UIColor = UInt(0x818B91).convertToUIColor()
 
-
 	/// #21222E
 	static let Dark: UIColor = UInt(0x21222E).convertToUIColor()
 	///	#303144
@@ -57,4 +56,3 @@ extension UInt {
 		)
 	}
 }
-

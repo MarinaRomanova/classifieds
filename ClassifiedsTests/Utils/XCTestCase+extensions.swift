@@ -8,7 +8,7 @@
 import XCTest
 
 extension XCTestCase {
-	func wait(interval: TimeInterval = 0.2 , completion: @escaping (() -> Void)) {
+	func wait(interval: TimeInterval = 0.2, completion: @escaping (() -> Void)) {
 		let exp = expectation(description: "Fetching")
 		DispatchQueue.main.asyncAfter(deadline: .now() + interval) {
 			completion()

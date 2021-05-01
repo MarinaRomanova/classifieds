@@ -21,7 +21,7 @@ final class ApiClient: Api {
 		do {
 			let request = try route.asURLRequest()
 
-			let task = URLSession.shared.dataTask(with: request) { data, response, error in
+			let task = URLSession.shared.dataTask(with: request) { data, _, error in
 				guard let data = data, error == nil else {
 					DispatchQueue.main.async {
 						completion(.failure(error))
