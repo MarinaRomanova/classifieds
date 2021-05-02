@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="17511" systemVersion="19H524" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="Category_" representedClassName="Category_" syncable="YES" codeGenerationType="class">
+        <attribute name="id" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="name" optional="YES" attributeType="String"/>
+        <relationship name="listings" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Listing_" inverseName="category" inverseEntity="Listing_"/>
+    </entity>
+    <entity name="Image_" representedClassName="Image_" syncable="YES" codeGenerationType="class">
+        <attribute name="small" optional="YES" attributeType="String"/>
+        <attribute name="thumb" optional="YES" attributeType="String"/>
+        <relationship name="listing" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Listing_" inverseName="image" inverseEntity="Listing_"/>
+    </entity>
+    <entity name="Listing_" representedClassName="Listing_" syncable="YES" codeGenerationType="class">
+        <attribute name="creationDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="descript" optional="YES" attributeType="String"/>
+        <attribute name="id" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="isUrgent" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="price" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="title" optional="YES" attributeType="String"/>
+        <relationship name="category" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Category_" inverseName="listings" inverseEntity="Category_"/>
+        <relationship name="image" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Image_" inverseName="listing" inverseEntity="Image_"/>
+    </entity>
+    <elements>
+        <element name="Listing_" positionX="-282.453125" positionY="-166.5859375" width="128" height="163"/>
+        <element name="Category_" positionX="-60.3671875" positionY="-170.16015625" width="128" height="88"/>
+        <element name="Image_" positionX="-64.03125" positionY="-12" width="128" height="88"/>
+    </elements>
+</model>

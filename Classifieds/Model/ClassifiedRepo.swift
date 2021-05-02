@@ -8,6 +8,8 @@
 import Foundation
 
 final class ClassifiedRepo: ClassifiedDataSource {
+	private var localDS = LocalDataSource()
+
 	weak var listingsDelegate: ListingsDelegate?
 	weak var filterDeleagate: FilterDelegate?
 
@@ -42,6 +44,12 @@ final class ClassifiedRepo: ClassifiedDataSource {
 		var listingsResp = [ListingsResponse]()
 		listingsDelegate?.onLoadingStarted()
 
+		if !localDS.listings.isEmpty {
+			self.listings = localDS.listings
+			localDS.listingsDelegate = listingsDelegate
+			return
+		}
+
 		let dispatchGroup: DispatchGroup = DispatchGroup()
 		fetchData(dispatchGroup) { [weak self] (_categories: [Category]) in
 			categories = _categories
@@ -57,6 +65,7 @@ final class ClassifiedRepo: ClassifiedDataSource {
 			for response in listingsResp {
 				if let category = categories.first(where: { $0.id == response.categoryId }) {
 					list.append(response.mapToDomain(with: category))
+					//listingsResp.forEach { self?.localDS.save(listingResp: $0, category: category) }
 				}
 			}
 			self?.listings = list.sorted { lhs, rhs -> Bool in
