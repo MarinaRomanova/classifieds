@@ -42,32 +42,39 @@ final class ClassifiedRepo: ClassifiedDataSource {
 	func fetchListings() {
 		var categories = [Category]()
 		var listingsResp = [ListingsResponse]()
-		listingsDelegate?.onLoadingStarted()
+		var list = [Listing]()
 
-		if !localDS.listings.isEmpty {
-			self.listings = localDS.listings
-			localDS.listingsDelegate = listingsDelegate
-			return
-		}
+		listingsDelegate?.onLoadingStarted()
+		localDS.listingsDelegate = listingsDelegate
 
 		let dispatchGroup: DispatchGroup = DispatchGroup()
-		fetchData(dispatchGroup) { [weak self] (_categories: [Category]) in
-			categories = _categories
-			self?.filters = categories.map { $0.mapToFilter()}
-		}
+		dispatchGroup.enter()
+		localDS.fetchListings()
+		dispatchGroup.leave()
 
-		fetchData(dispatchGroup, decoder: apiClient.getDateDecoder()) {_listings in
-			listingsResp = _listings
+		if localDS.listings_.isEmpty {
+			fetchData(dispatchGroup) { [weak self] (_categories: [Category]) in
+				categories = _categories
+				self?.filters = categories.map { $0.mapToFilter()}
+			}
+
+			fetchData(dispatchGroup, decoder: apiClient.getDateDecoder()) {_listings in
+				listingsResp = _listings
+			}
+		} else {
+			list = localDS.listings
 		}
 
 		dispatchGroup.notify(queue: .main) { [weak self] in
-			var list = [Listing]()
-			for response in listingsResp {
-				if let category = categories.first(where: { $0.id == response.categoryId }) {
-					list.append(response.mapToDomain(with: category))
-					//listingsResp.forEach { self?.localDS.save(listingResp: $0, category: category) }
+			if list.isEmpty {
+				for response in listingsResp {
+					if let category = categories.first(where: { $0.id == response.categoryId }) {
+						list.append(response.mapToDomain(with: category))
+						self?.localDS.save(listingResp: response, category: category)
+					}
 				}
 			}
+
 			self?.listings = list.sorted { lhs, rhs -> Bool in
 				if lhs.isUrgent && !rhs.isUrgent {
 					return true
